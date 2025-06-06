@@ -262,22 +262,39 @@ class BrowserWarsApp {
             })
             .style('opacity', d => d.data.share > 3 ? 1 : 0);
 
-        // Add labels (moved below logos for better positioning)
+        // Add browser name labels
         arcs.append('text')
-            .attr('class', 'arc-label')
+            .attr('class', 'arc-label-name')
             .attr('text-anchor', 'middle')
             .attr('font-family', 'Arial, sans-serif')
-            .attr('font-size', '10px')
+            .attr('font-size', '14px')
             .attr('font-weight', 'bold')
-            .attr('fill', '#333')
+            .attr('fill', '#fff')
+            .attr('stroke', '#000')
+            .attr('stroke-width', '0.5px')
             .attr('transform', d => {
                 const centroid = this.labelArc.centroid(d);
-                return `translate(${centroid[0]}, ${centroid[1] + 20})`;
+                return `translate(${centroid[0]}, ${centroid[1] + 15})`;
             })
-            .text(d => {
-                return d.data.share > 8 ? `${d.data.name}\n${d.data.share.toFixed(1)}%` : d.data.share > 5 ? `${d.data.share.toFixed(1)}%` : '';
+            .text(d => d.data.share > 8 ? d.data.name : '')
+            .style('opacity', d => d.data.share > 8 ? 1 : 0);
+
+        // Add percentage labels (larger and more prominent)
+        arcs.append('text')
+            .attr('class', 'arc-label-percent')
+            .attr('text-anchor', 'middle')
+            .attr('font-family', 'Arial, sans-serif')
+            .attr('font-size', '16px')
+            .attr('font-weight', 'bold')
+            .attr('fill', '#fff')
+            .attr('stroke', '#000')
+            .attr('stroke-width', '0.5px')
+            .attr('transform', d => {
+                const centroid = this.labelArc.centroid(d);
+                return `translate(${centroid[0]}, ${centroid[1] + 32})`;
             })
-            .style('opacity', d => d.data.share > 5 ? 1 : 0);
+            .text(d => d.data.share > 3 ? `${d.data.share.toFixed(1)}%` : '')
+            .style('opacity', d => d.data.share > 3 ? 1 : 0);
     }
     
     
