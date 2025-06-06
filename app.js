@@ -143,6 +143,54 @@ class BrowserWarsApp {
     }
     
     updatePieChart(data) {
+        if (this.isDragging) {
+            // When dragging, completely rebuild the chart for instant updates
+            this.rebuildPieChart(data);
+        } else {
+            // When not dragging, use smooth transitions
+            this.animatedPieChart(data);
+        }
+    }
+    
+    rebuildPieChart(data) {
+        const pieData = this.pie(data);
+        
+        // Clear all existing arcs instantly
+        this.chartGroup.selectAll('.arc').remove();
+        
+        // Create new arcs from scratch
+        const arcs = this.chartGroup.selectAll('.arc')
+            .data(pieData)
+            .enter()
+            .append('g')
+            .attr('class', 'arc');
+        
+        // Add paths
+        arcs.append('path')
+            .attr('d', this.arc)
+            .attr('fill', d => d.data.color)
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 2);
+        
+        // Add labels
+        arcs.append('text')
+            .attr('class', 'arc-label')
+            .attr('text-anchor', 'middle')
+            .attr('font-family', 'Arial, sans-serif')
+            .attr('font-size', '12px')
+            .attr('font-weight', 'bold')
+            .attr('fill', '#333')
+            .attr('transform', d => {
+                const centroid = this.labelArc.centroid(d);
+                return `translate(${centroid})`;
+            })
+            .text(d => {
+                return d.data.share > 5 ? `${d.data.name}\n${d.data.share.toFixed(1)}%` : '';
+            })
+            .style('opacity', d => d.data.share > 5 ? 1 : 0);
+    }
+    
+    animatedPieChart(data) {
         const pieData = this.pie(data);
         
         // Bind data to path elements
@@ -172,57 +220,32 @@ class BrowserWarsApp {
         // Update all arcs (enter + existing)
         const allArcs = arcs.merge(enterArcs);
         
-        // Animate path transitions (skip if dragging)
-        const pathSelection = allArcs.select('path');
-        const textSelection = allArcs.select('text');
+        // Animate path transitions
+        allArcs.select('path')
+            .transition()
+            .duration(200)
+            .attr('d', this.arc)
+            .attr('fill', d => d.data.color);
         
-        if (this.isDragging) {
-            // No transitions when dragging
-            pathSelection
-                .attr('d', this.arc)
-                .attr('fill', d => d.data.color);
-            
-            textSelection
-                .attr('transform', d => {
-                    const centroid = this.labelArc.centroid(d);
-                    return `translate(${centroid})`;
-                })
-                .text(d => {
-                    return d.data.share > 5 ? `${d.data.name}\n${d.data.share.toFixed(1)}%` : '';
-                })
-                .style('opacity', d => d.data.share > 5 ? 1 : 0);
-        } else {
-            // Use transitions when not dragging
-            pathSelection
-                .transition()
-                .duration(200)
-                .attr('d', this.arc)
-                .attr('fill', d => d.data.color);
-            
-            textSelection
-                .transition()
-                .duration(200)
-                .attr('transform', d => {
-                    const centroid = this.labelArc.centroid(d);
-                    return `translate(${centroid})`;
-                })
-                .text(d => {
-                    return d.data.share > 5 ? `${d.data.name}\n${d.data.share.toFixed(1)}%` : '';
-                })
-                .style('opacity', d => d.data.share > 5 ? 1 : 0);
-        }
+        // Update labels with transitions
+        allArcs.select('text')
+            .transition()
+            .duration(200)
+            .attr('transform', d => {
+                const centroid = this.labelArc.centroid(d);
+                return `translate(${centroid})`;
+            })
+            .text(d => {
+                return d.data.share > 5 ? `${d.data.name}\n${d.data.share.toFixed(1)}%` : '';
+            })
+            .style('opacity', d => d.data.share > 5 ? 1 : 0);
         
-        // Remove old arcs (use transitions only when not dragging)
-        const exitSelection = arcs.exit();
-        if (this.isDragging) {
-            exitSelection.remove();
-        } else {
-            exitSelection
-                .transition()
-                .duration(200)
-                .style('opacity', 0)
-                .remove();
-        }
+        // Remove old arcs with transition
+        arcs.exit()
+            .transition()
+            .duration(200)
+            .style('opacity', 0)
+            .remove();
     }
     
     updateLegend(data) {
