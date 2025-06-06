@@ -1,114 +1,132 @@
 // Browser market share data from 1992-2025
 // Data sources: StatCounter, NetMarketShare, W3Counter historical data
 
+// Centralized browser configuration
+const BROWSERS = {
+    LYNX: { name: "Lynx", color: "#808080" },
+    MOSAIC: { name: "Mosaic", color: "#8A2BE2" },
+    NETSCAPE: { name: "Netscape", color: "#008B8B" },
+    IE: { name: "Internet Explorer", color: "#1BA1E2" },
+    FIREFOX: { name: "Firefox", color: "#FF7139" },
+    SAFARI: { name: "Safari", color: "#007AFF" },
+    CHROME: { name: "Chrome", color: "#34A853" },
+    EDGE: { name: "Edge", color: "#0078D4" },
+    OTHER: { name: "Other", color: "#FF69B4" }
+};
+
+// Helper function to create browser data entry
+function browser(type, share) {
+    return { name: BROWSERS[type].name, share, color: BROWSERS[type].color };
+}
+
 const browserData = {
     1992: [
-        { name: "Mosaic", share: 60, color: "#8A2BE2" },
-        { name: "Lynx", share: 25, color: "#808080" },
-        { name: "Other", share: 15, color: "#FF69B4" }
+        browser('MOSAIC', 60),
+        browser('LYNX', 25),
+        browser('OTHER', 15)
     ],
     1995: [
-        { name: "Netscape Navigator", share: 80, color: "#008B8B" }, // Netscape dark teal
-        { name: "Internet Explorer", share: 3, color: "#1BA1E2" }, // IE blue
-        { name: "Mosaic", share: 10, color: "#8A2BE2" },
-        { name: "Other", share: 7, color: "#FF69B4" }
+        browser('NETSCAPE', 80),
+        browser('IE', 3),
+        browser('MOSAIC', 10),
+        browser('OTHER', 7)
     ],
     1997: [
-        { name: "Netscape Navigator", share: 72, color: "#008B8B" }, // Netscape dark teal
-        { name: "Internet Explorer", share: 20, color: "#1BA1E2" }, // IE blue
-        { name: "Other", share: 8, color: "#FF69B4" }
+        browser('NETSCAPE', 72),
+        browser('IE', 20),
+        browser('OTHER', 8)
     ],
     1999: [
-        { name: "Internet Explorer", share: 53, color: "#1BA1E2" }, // IE blue
-        { name: "Netscape Navigator", share: 40, color: "#008B8B" }, // Netscape dark teal
-        { name: "Other", share: 7, color: "#FF69B4" }
+        browser('IE', 53),
+        browser('NETSCAPE', 40),
+        browser('OTHER', 7)
     ],
     2001: [
-        { name: "Internet Explorer", share: 86, color: "#1BA1E2" }, // IE blue
-        { name: "Netscape", share: 10, color: "#008B8B" }, // Netscape dark teal
-        { name: "Other", share: 4, color: "#FF69B4" }
+        browser('IE', 86),
+        browser('NETSCAPE', 10),
+        browser('OTHER', 4)
     ],
     2003: [
-        { name: "Internet Explorer", share: 92, color: "#1BA1E2" }, // IE blue
-        { name: "Netscape", share: 4, color: "#008B8B" }, // Netscape dark teal
-        { name: "Other", share: 4, color: "#FF69B4" }
+        browser('IE', 92),
+        browser('NETSCAPE', 4),
+        browser('OTHER', 4)
     ],
     2005: [
-        { name: "Internet Explorer", share: 85, color: "#1BA1E2" }, // IE blue
-        { name: "Firefox", share: 9, color: "#FF7139" }, // Firefox orange
-        { name: "Safari", share: 2, color: "#007AFF" }, // Safari blue
-        { name: "Other", share: 4, color: "#FF69B4" }
+        browser('IE', 85),
+        browser('FIREFOX', 9),
+        browser('SAFARI', 2),
+        browser('OTHER', 4)
     ],
     2007: [
-        { name: "Internet Explorer", share: 77, color: "#1BA1E2" }, // IE blue
-        { name: "Firefox", share: 16, color: "#FF7139" }, // Firefox orange
-        { name: "Safari", share: 4, color: "#007AFF" }, // Safari blue
-        { name: "Other", share: 3, color: "#FF69B4" }
+        browser('IE', 77),
+        browser('FIREFOX', 16),
+        browser('SAFARI', 4),
+        browser('OTHER', 3)
     ],
     2009: [
-        { name: "Internet Explorer", share: 65, color: "#1BA1E2" }, // IE blue
-        { name: "Firefox", share: 23, color: "#FF7139" }, // Firefox orange
-        { name: "Chrome", share: 4, color: "#34A853" }, // Chrome green
-        { name: "Safari", share: 4, color: "#007AFF" }, // Safari blue
-        { name: "Other", share: 4, color: "#FF69B4" }
+        browser('IE', 65),
+        browser('FIREFOX', 23),
+        browser('CHROME', 4),
+        browser('SAFARI', 4),
+        browser('OTHER', 4)
     ],
     2011: [
-        { name: "Internet Explorer", share: 44, color: "#1BA1E2" }, // IE blue
-        { name: "Firefox", share: 30, color: "#FF7139" }, // Firefox orange
-        { name: "Chrome", share: 20, color: "#34A853" }, // Chrome green
-        { name: "Safari", share: 4, color: "#007AFF" }, // Safari blue
-        { name: "Other", share: 2, color: "#FF69B4" }
+        browser('IE', 44),
+        browser('FIREFOX', 30),
+        browser('CHROME', 20),
+        browser('SAFARI', 4),
+        browser('OTHER', 2)
     ],
     2013: [
-        { name: "Chrome", share: 43, color: "#34A853" }, // Chrome green
-        { name: "Internet Explorer", share: 30, color: "#1BA1E2" }, // IE blue
-        { name: "Firefox", share: 20, color: "#FF7139" }, // Firefox orange
-        { name: "Safari", share: 5, color: "#007AFF" }, // Safari blue
-        { name: "Other", share: 2, color: "#FF69B4" }
+        browser('CHROME', 43),
+        browser('IE', 30),
+        browser('FIREFOX', 20),
+        browser('SAFARI', 5),
+        browser('OTHER', 2)
     ],
     2015: [
-        { name: "Chrome", share: 53, color: "#34A853" }, // Chrome green
-        { name: "Internet Explorer", share: 19, color: "#1BA1E2" }, // IE blue
-        { name: "Firefox", share: 16, color: "#FF7139" }, // Firefox orange
-        { name: "Safari", share: 10, color: "#007AFF" }, // Safari blue
-        { name: "Other", share: 2, color: "#FF69B4" }
+        browser('CHROME', 53),
+        browser('IE', 19),
+        browser('FIREFOX', 16),
+        browser('SAFARI', 10),
+        browser('OTHER', 2)
     ],
     2017: [
-        { name: "Chrome", share: 58, color: "#34A853" }, // Chrome green
-        { name: "Safari", share: 14, color: "#007AFF" }, // Safari blue
-        { name: "Firefox", share: 13, color: "#FF7139" }, // Firefox orange
-        { name: "Internet Explorer", share: 9, color: "#1BA1E2" }, // IE blue
-        { name: "Edge", share: 4, color: "#0078D4" }, // Edge blue
-        { name: "Other", share: 2, color: "#FF69B4" }
+        browser('CHROME', 58),
+        browser('SAFARI', 14),
+        browser('FIREFOX', 13),
+        browser('IE', 9),
+        browser('EDGE', 4),
+        browser('OTHER', 2)
     ],
     2019: [
-        { name: "Chrome", share: 64, color: "#34A853" }, // Chrome green
-        { name: "Safari", share: 16, color: "#007AFF" }, // Safari blue
-        { name: "Firefox", share: 10, color: "#FF7139" }, // Firefox orange
-        { name: "Edge", share: 5, color: "#0078D4" }, // Edge blue
-        { name: "Internet Explorer", share: 3, color: "#1BA1E2" }, // IE blue
-        { name: "Other", share: 2, color: "#FF69B4" }
+        browser('CHROME', 64),
+        browser('SAFARI', 16),
+        browser('FIREFOX', 10),
+        browser('EDGE', 5),
+        browser('IE', 3),
+        browser('OTHER', 2)
     ],
     2021: [
-        { name: "Chrome", share: 65, color: "#34A853" }, // Chrome green
-        { name: "Safari", share: 19, color: "#007AFF" }, // Safari blue
-        { name: "Edge", share: 8, color: "#0078D4" }, // Edge blue
-        { name: "Firefox", share: 6, color: "#FF7139" }, // Firefox orange
-        { name: "Other", share: 2, color: "#FF69B4" }
+        browser('CHROME', 65),
+        browser('SAFARI', 19),
+        browser('EDGE', 8),
+        browser('FIREFOX', 6),
+        browser('OTHER', 2)
     ],
     2023: [
-        { name: "Chrome", share: 63, color: "#34A853" }, // Chrome green
-        { name: "Safari", share: 20, color: "#007AFF" }, // Safari blue
-        { name: "Edge", share: 11, color: "#0078D4" }, // Edge blue
-        { name: "Firefox", share: 4, color: "#FF7139" }, // Firefox orange
-        { name: "Other", share: 2, color: "#FF69B4" }
+        browser('CHROME', 63),
+        browser('SAFARI', 20),
+        browser('EDGE', 11),
+        browser('FIREFOX', 4),
+        browser('OTHER', 2)
     ],
     2025: [
-        { name: "Chrome", share: 61, color: "#34A853" }, // Chrome green
-        { name: "Safari", share: 22, color: "#007AFF" }, // Safari blue
-        { name: "Edge", share: 13, color: "#0078D4" }, // Edge blue
-        { name: "Firefox", share: 3, color: "#FF7139" }, // Firefox orange
-        { name: "Other", share: 1, color: "#FF69B4" }
+        browser('CHROME', 61),
+        browser('SAFARI', 22),
+        browser('EDGE', 13),
+        browser('FIREFOX', 3),
+        browser('OTHER', 1)
     ]
 };
 
@@ -152,16 +170,15 @@ const historicalEvents = {
 
 // Browser chronological order based on appearance/dominance
 const browserChronology = [
-    "Lynx",           // 1992 - First text browser
-    "Mosaic",         // 1993 - First graphical browser
-    "Netscape Navigator", // 1994 - First major commercial browser
-    "Netscape",       // Later shortened name
-    "Internet Explorer", // 1995 - Microsoft's entry
-    "Firefox",        // 2004 - Mozilla's successor
-    "Safari",         // 2003 - Apple's browser
-    "Chrome",         // 2008 - Google's browser
-    "Edge",           // 2015 - Microsoft's modern browser
-    "Other"           // Catch-all for remaining browsers
+    BROWSERS.LYNX.name,           // 1992 - First text browser
+    BROWSERS.MOSAIC.name,         // 1993 - First graphical browser
+    BROWSERS.NETSCAPE.name,       // 1994 - Netscape (unified name)
+    BROWSERS.IE.name,             // 1995 - Microsoft's entry
+    BROWSERS.FIREFOX.name,        // 2004 - Mozilla's successor
+    BROWSERS.SAFARI.name,         // 2003 - Apple's browser
+    BROWSERS.CHROME.name,         // 2008 - Google's browser
+    BROWSERS.EDGE.name,           // 2015 - Microsoft's modern browser
+    BROWSERS.OTHER.name           // Catch-all for remaining browsers
 ];
 
 // Function to get chronological sort order

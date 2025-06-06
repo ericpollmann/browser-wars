@@ -50,8 +50,7 @@ class BrowserWarsApp {
         this.browserChronology = [
             "Lynx",           // 1992 - First text browser
             "Mosaic",         // 1993 - First graphical browser
-            "Netscape Navigator", // 1994 - First major commercial browser
-            "Netscape",       // Later shortened name
+            "Netscape",       // 1994 - Netscape (unified name)
             "Internet Explorer", // 1995 - Microsoft's entry
             "Firefox",        // 2004 - Mozilla's successor
             "Safari",         // 2003 - Apple's browser
