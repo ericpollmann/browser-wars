@@ -42,11 +42,40 @@ Browser market share data compiled from:
 
 ## Browser Color Coding
 
-- **Mosaic**: Brown (#8B4513)
-- **Netscape Navigator**: Teal (#00CED1) - Authentic logo color
+- **Mosaic**: Purple (#8A2BE2) - First graphical browser
+- **Lynx**: Grey (#808080) - Text-based browser
+- **Netscape**: Dark Teal (#008B8B) - Optimized for text readability
 - **Internet Explorer**: IE Blue (#1BA1E2) - Authentic logo color
 - **Firefox**: Orange (#FF7139) - Authentic logo color
 - **Chrome**: Google Green (#34A853) - Distinctive green for better differentiation
 - **Safari**: Safari Blue (#007AFF) - Authentic logo color
 - **Edge**: Microsoft Blue (#0078D4) - Authentic logo color
-- **Other**: Gray (#808080)
+- **Other**: Pink (#FF69B4) - Distinctive color for remaining browsers
+
+## Deployment
+
+### Quick Deploy to GitHub Pages
+```bash
+# 1. Create repository on GitHub
+# 2. Add remote and push
+git remote add origin https://github.com/YOUR_USERNAME/browser-wars.git
+git push -u origin main
+
+# 3. Enable Pages in repository Settings → Pages → Deploy from branch → main
+```
+
+### Alternative Hosting Options
+- **Netlify**: Drag and drop the project folder to netlify.com
+- **Vercel**: Run `vercel` in the project directory
+- **Surge**: Run `surge` in the project directory
+- **Firebase**: Use `firebase init hosting` and `firebase deploy`
+
+See `deploy.md` for detailed deployment instructions.
+
+## Development
+
+The project uses a clean, modular structure:
+- `browserData.js`: Centralized browser configuration and historical data
+- `app.js`: Main application logic and D3.js visualization
+- `styles.css`: Responsive design with glassmorphism effects
+- `icons/`: Authentic browser logos and icons
