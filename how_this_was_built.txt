@@ -1,0 +1,1 @@
+extract the claude history (all the commands I typed in this session) into a simple text file with one prompt per line called 'how_this_was_built.txt'
