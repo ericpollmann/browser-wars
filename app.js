@@ -15,17 +15,18 @@ class BrowserWarsApp {
             'July', 'August', 'September', 'October', 'November', 'December'
         ];
         
-        // Browser logo mapping
-        this.browserLogos = {
-            'Chrome': 'logos/chrome.svg',
-            'Firefox': 'logos/firefox.svg',
-            'Safari': 'logos/safari.svg',
-            'Internet Explorer': 'logos/ie.svg',
-            'Edge': 'logos/edge.svg',
-            'Netscape Navigator': 'logos/netscape.svg',
-            'Netscape': 'logos/netscape.svg',
-            'Mosaic': 'logos/mosaic.svg',
-            'Other': 'logos/other.svg'
+        // Browser icon mapping - all from Iconduck browser-logos set
+        this.browserIcons = {
+            'Chrome': 'icons/chrome.png',
+            'Firefox': 'icons/firefox.png',
+            'Safari': 'icons/safari.png',
+            'Internet Explorer': 'icons/ie.png',
+            'Edge': 'icons/edge.png',
+            'Netscape Navigator': 'icons/netscape.png',
+            'Netscape': 'icons/netscape.png',
+            'Mosaic': 'icons/mosaic.png',
+            'Lynx': 'icons/lynx.png',
+            'Other': 'icons/other.png'
         };
         
         this.svg = d3.select('#pie-chart');
@@ -45,10 +46,24 @@ class BrowserWarsApp {
             .append('g')
             .attr('transform', `translate(${this.width / 2}, ${this.height / 2})`);
         
-        // Create pie generator with alphabetical sorting
+        // Browser chronological order (matching browserData.js)
+        this.browserChronology = [
+            "Lynx",           // 1992 - First text browser
+            "Mosaic",         // 1993 - First graphical browser
+            "Netscape Navigator", // 1994 - First major commercial browser
+            "Netscape",       // Later shortened name
+            "Internet Explorer", // 1995 - Microsoft's entry
+            "Firefox",        // 2004 - Mozilla's successor
+            "Safari",         // 2003 - Apple's browser
+            "Chrome",         // 2008 - Google's browser
+            "Edge",           // 2015 - Microsoft's modern browser
+            "Other"           // Catch-all for remaining browsers
+        ];
+        
+        // Create pie generator with chronological sorting
         this.pie = d3.pie()
             .value(d => d.share)
-            .sort((a, b) => a.name.localeCompare(b.name));
+            .sort((a, b) => this.getChronologicalOrder(a.name) - this.getChronologicalOrder(b.name));
         
         // Create arc generator
         this.arc = d3.arc()
@@ -59,6 +74,11 @@ class BrowserWarsApp {
         this.labelArc = d3.arc()
             .innerRadius(this.radius * 0.7)
             .outerRadius(this.radius * 0.7);
+    }
+    
+    getChronologicalOrder(browserName) {
+        const index = this.browserChronology.indexOf(browserName);
+        return index === -1 ? this.browserChronology.length : index;
     }
     
     setupControls() {
@@ -230,15 +250,15 @@ class BrowserWarsApp {
             .attr('stroke', '#fff')
             .attr('stroke-width', 2);
         
-        // Add logos
+        // Add browser icons
         arcs.append('image')
-            .attr('class', 'arc-logo')
-            .attr('width', 24)
-            .attr('height', 24)
-            .attr('href', d => this.browserLogos[d.data.name] || this.browserLogos['Other'])
+            .attr('class', 'arc-icon')
+            .attr('width', 32)
+            .attr('height', 32)
+            .attr('href', d => this.browserIcons[d.data.name] || 'icons/other.png')
             .attr('transform', d => {
                 const centroid = this.arc.centroid(d);
-                return `translate(${centroid[0] - 12}, ${centroid[1] - 12})`;
+                return `translate(${centroid[0] - 16}, ${centroid[1] - 16})`;
             })
             .style('opacity', d => d.data.share > 3 ? 1 : 0);
 
