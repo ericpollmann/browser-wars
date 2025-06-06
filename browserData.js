@@ -130,6 +130,26 @@ const historicalEvents = {
     2023: "Chrome maintains leadership despite privacy concerns"
 };
 
+// Browser chronological order based on appearance/dominance
+const browserChronology = [
+    "Lynx",           // 1992 - First text browser
+    "Mosaic",         // 1993 - First graphical browser
+    "Netscape Navigator", // 1994 - First major commercial browser
+    "Netscape",       // Later shortened name
+    "Internet Explorer", // 1995 - Microsoft's entry
+    "Firefox",        // 2004 - Mozilla's successor
+    "Safari",         // 2003 - Apple's browser
+    "Chrome",         // 2008 - Google's browser
+    "Edge",           // 2015 - Microsoft's modern browser
+    "Other"           // Catch-all for remaining browsers
+];
+
+// Function to get chronological sort order
+function getChronologicalOrder(browserName) {
+    const index = browserChronology.indexOf(browserName);
+    return index === -1 ? browserChronology.length : index;
+}
+
 // Function to interpolate between two years of data
 function interpolateData(year) {
     const years = Object.keys(browserData).map(Number).sort((a, b) => a - b);
@@ -146,9 +166,11 @@ function interpolateData(year) {
         }
     }
     
-    // If exact match, return that data (sorted alphabetically)
+    // If exact match, return that data (sorted chronologically)
     if (browserData[year]) {
-        return browserData[year].slice().sort((a, b) => a.name.localeCompare(b.name));
+        return browserData[year].slice().sort((a, b) => 
+            getChronologicalOrder(a.name) - getChronologicalOrder(b.name)
+        );
     }
     
     // Interpolate between two years
@@ -178,5 +200,7 @@ function interpolateData(year) {
         }
     });
     
-    return interpolated.sort((a, b) => a.name.localeCompare(b.name));
+    return interpolated.sort((a, b) => 
+        getChronologicalOrder(a.name) - getChronologicalOrder(b.name)
+    );
 }
