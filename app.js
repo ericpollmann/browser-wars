@@ -1,11 +1,18 @@
 class BrowserWarsApp {
     constructor() {
         this.currentYear = 1992;
+        this.currentMonth = 0; // 0-11 for Jan-Dec
         this.isPlaying = false;
         this.totalYears = 2025 - 1992; // 33 years
-        this.yearDuration = 5000; // 5 seconds per year
-        this.animationSpeed = this.totalYears * this.yearDuration; // Total duration: 165 seconds
-        this.stepInterval = this.yearDuration / 4; // Quarter-year steps (1.25 seconds per step)
+        this.totalMonths = this.totalYears * 12; // 396 months total
+        this.monthDuration = 400; // ~400ms per month for smooth animation
+        this.animationSpeed = this.totalMonths * this.monthDuration; // Total duration: ~2.6 minutes
+        this.stepInterval = this.monthDuration; // Monthly steps
+        
+        this.monthNames = [
+            'January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'
+        ];
         
         this.svg = d3.select('#pie-chart');
         this.width = 600;
@@ -48,7 +55,9 @@ class BrowserWarsApp {
         });
         
         timelineScubber.addEventListener('input', (e) => {
-            this.currentYear = parseFloat(e.target.value);
+            const yearFloat = parseFloat(e.target.value);
+            this.currentYear = Math.floor(yearFloat);
+            this.currentMonth = Math.floor((yearFloat - this.currentYear) * 12);
             this.updateVisualization();
             if (this.isPlaying) {
                 this.pause();
@@ -76,13 +85,21 @@ class BrowserWarsApp {
         document.getElementById('play-pause-btn').innerHTML = '⏸';
         
         this.animationInterval = setInterval(() => {
-            this.currentYear += 0.25; // Quarter-year steps
+            this.currentMonth++;
+            
+            if (this.currentMonth >= 12) {
+                this.currentMonth = 0;
+                this.currentYear++;
+            }
             
             if (this.currentYear > 2025) {
                 this.currentYear = 1992;
+                this.currentMonth = 0;
             }
             
-            document.getElementById('timeline-scrubber').value = this.currentYear;
+            // Update scrubber value (year + month fraction)
+            const scrubberValue = this.currentYear + (this.currentMonth / 12);
+            document.getElementById('timeline-scrubber').value = scrubberValue;
             this.updateVisualization();
         }, this.stepInterval);
     }
@@ -97,14 +114,15 @@ class BrowserWarsApp {
     }
     
     updateVisualization() {
-        const data = interpolateData(this.currentYear);
-        const yearDisplay = Math.floor(this.currentYear);
+        const yearFloat = this.currentYear + (this.currentMonth / 12);
+        const data = interpolateData(yearFloat);
         
-        // Update year display
-        document.getElementById('current-year').textContent = yearDisplay;
+        // Update year and month display
+        document.getElementById('current-year').textContent = this.currentYear;
+        document.getElementById('current-month').textContent = this.monthNames[this.currentMonth];
         
         // Update historical note
-        this.updateHistoricalNote(yearDisplay);
+        this.updateHistoricalNote(this.currentYear);
         
         // Update pie chart
         this.updatePieChart(data);

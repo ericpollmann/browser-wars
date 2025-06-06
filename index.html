@@ -19,7 +19,10 @@
                 <div class="chart-wrapper">
                     <svg id="pie-chart" width="600" height="600"></svg>
                     <div class="chart-info">
-                        <div class="current-year" id="current-year">1992</div>
+                        <div class="date-display">
+                            <div class="current-year" id="current-year">1992</div>
+                            <div class="current-month" id="current-month">January</div>
+                        </div>
                         <div class="historical-note" id="historical-note"></div>
                     </div>
                 </div>
@@ -31,7 +34,7 @@
                 <div class="timeline-controls">
                     <button id="play-pause-btn" class="play-btn">▶</button>
                     <div class="timeline-wrapper">
-                        <input type="range" id="timeline-scrubber" min="1992" max="2025" value="1992" step="0.25">
+                        <input type="range" id="timeline-scrubber" min="1992" max="2025" value="1992" step="0.083333">
                         <div class="timeline-labels">
                             <span>1992</span>
                             <span>2025</span>
