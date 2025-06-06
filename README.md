@@ -46,7 +46,7 @@ Browser market share data compiled from:
 - **Netscape Navigator**: Teal (#00CED1) - Authentic logo color
 - **Internet Explorer**: IE Blue (#1BA1E2) - Authentic logo color
 - **Firefox**: Orange (#FF7139) - Authentic logo color
-- **Chrome**: Google Blue (#4285F4) - Authentic logo color
+- **Chrome**: Google Green (#34A853) - Distinctive green for better differentiation
 - **Safari**: Safari Blue (#007AFF) - Authentic logo color
 - **Edge**: Microsoft Blue (#0078D4) - Authentic logo color
 - **Other**: Gray (#808080)
