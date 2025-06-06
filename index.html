@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Wars: Evolution of Market Share 1992-2025</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Browser Wars</h1>
+            <h2>Evolution of Browser Market Share 1992-2025</h2>
+        </header>
+        
+        <main>
+            <div class="chart-container">
+                <div class="chart-wrapper">
+                    <svg id="pie-chart" width="600" height="600"></svg>
+                    <div class="chart-info">
+                        <div class="current-year" id="current-year">1992</div>
+                        <div class="historical-note" id="historical-note"></div>
+                    </div>
+                </div>
+                
+                <div class="legend" id="legend"></div>
+            </div>
+            
+            <div class="timeline-container">
+                <div class="timeline-controls">
+                    <button id="play-pause-btn" class="play-btn">▶</button>
+                    <div class="timeline-wrapper">
+                        <input type="range" id="timeline-scrubber" min="1992" max="2025" value="1992" step="0.25">
+                        <div class="timeline-labels">
+                            <span>1992</span>
+                            <span>2025</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="browserData.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
