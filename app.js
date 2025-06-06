@@ -15,6 +15,19 @@ class BrowserWarsApp {
             'July', 'August', 'September', 'October', 'November', 'December'
         ];
         
+        // Browser logo mapping
+        this.browserLogos = {
+            'Chrome': 'logos/chrome.svg',
+            'Firefox': 'logos/firefox.svg',
+            'Safari': 'logos/safari.svg',
+            'Internet Explorer': 'logos/ie.svg',
+            'Edge': 'logos/edge.svg',
+            'Netscape Navigator': 'logos/netscape.svg',
+            'Netscape': 'logos/netscape.svg',
+            'Mosaic': 'logos/mosaic.svg',
+            'Other': 'logos/other.svg'
+        };
+        
         this.svg = d3.select('#pie-chart');
         this.width = 600;
         this.height = 600;
@@ -22,6 +35,7 @@ class BrowserWarsApp {
         
         this.setupChart();
         this.setupControls();
+        this.setupTimeline();
         this.updateVisualization();
     }
     
@@ -74,6 +88,51 @@ class BrowserWarsApp {
                 this.pause();
             }
         });
+    }
+    
+    setupTimeline() {
+        const timelineMarks = document.getElementById('timeline-marks');
+        
+        if (!timelineMarks) {
+            console.error('Timeline marks element not found');
+            return;
+        }
+        
+        const startYear = 1992;
+        const endYear = 2025;
+        const totalYears = endYear - startYear;
+        
+        // Clear any existing marks
+        timelineMarks.innerHTML = '';
+        
+        console.log('Creating timeline marks...');
+        
+        // Create marks only for major years (every 5 years + end year)
+        for (let year = startYear; year <= endYear; year++) {
+            // Only create marks for every 5th year or the end year
+            if ((year - startYear) % 5 === 0 || year === endYear) {
+                const position = ((year - startYear) / totalYears) * 100;
+                
+                // Create major mark element
+                const mark = document.createElement('div');
+                mark.className = 'timeline-mark major';
+                mark.style.left = `${position}%`;
+                mark.style.backgroundColor = '#666666'; // Grey color
+                mark.style.height = '12px';
+                mark.style.width = '3px';
+                
+                // Add label
+                const label = document.createElement('div');
+                label.className = 'timeline-mark-label';
+                label.textContent = year;
+                label.style.left = `${position}%`;
+                label.style.color = '#333333'; // Dark grey text for visibility
+                timelineMarks.appendChild(label);
+                timelineMarks.appendChild(mark);
+            }
+        }
+        
+        console.log(`Created ${timelineMarks.children.length} timeline elements`);
     }
     
     togglePlayPause() {
@@ -171,20 +230,32 @@ class BrowserWarsApp {
             .attr('stroke', '#fff')
             .attr('stroke-width', 2);
         
-        // Add labels
+        // Add logos
+        arcs.append('image')
+            .attr('class', 'arc-logo')
+            .attr('width', 24)
+            .attr('height', 24)
+            .attr('href', d => this.browserLogos[d.data.name] || this.browserLogos['Other'])
+            .attr('transform', d => {
+                const centroid = this.arc.centroid(d);
+                return `translate(${centroid[0] - 12}, ${centroid[1] - 12})`;
+            })
+            .style('opacity', d => d.data.share > 3 ? 1 : 0);
+
+        // Add labels (moved below logos for better positioning)
         arcs.append('text')
             .attr('class', 'arc-label')
             .attr('text-anchor', 'middle')
             .attr('font-family', 'Arial, sans-serif')
-            .attr('font-size', '12px')
+            .attr('font-size', '10px')
             .attr('font-weight', 'bold')
             .attr('fill', '#333')
             .attr('transform', d => {
                 const centroid = this.labelArc.centroid(d);
-                return `translate(${centroid})`;
+                return `translate(${centroid[0]}, ${centroid[1] + 20})`;
             })
             .text(d => {
-                return d.data.share > 5 ? `${d.data.name}\n${d.data.share.toFixed(1)}%` : '';
+                return d.data.share > 8 ? `${d.data.name}\n${d.data.share.toFixed(1)}%` : d.data.share > 5 ? `${d.data.share.toFixed(1)}%` : '';
             })
             .style('opacity', d => d.data.share > 5 ? 1 : 0);
     }

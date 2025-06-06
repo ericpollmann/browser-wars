@@ -3,75 +3,75 @@
 
 const browserData = {
     1992: [
-        { name: "Mosaic", share: 60, color: "#8B4513" },
-        { name: "Lynx", share: 25, color: "#2F4F4F" },
-        { name: "Other", share: 15, color: "#808080" }
+        { name: "Mosaic", share: 60, color: "#8A2BE2" },
+        { name: "Lynx", share: 25, color: "#808080" },
+        { name: "Other", share: 15, color: "#FF69B4" }
     ],
     1995: [
         { name: "Netscape Navigator", share: 80, color: "#00CED1" }, // Netscape teal
         { name: "Internet Explorer", share: 3, color: "#1BA1E2" }, // IE blue
-        { name: "Mosaic", share: 10, color: "#8B4513" },
-        { name: "Other", share: 7, color: "#808080" }
+        { name: "Mosaic", share: 10, color: "#8A2BE2" },
+        { name: "Other", share: 7, color: "#FF69B4" }
     ],
     1997: [
         { name: "Netscape Navigator", share: 72, color: "#00CED1" }, // Netscape teal
         { name: "Internet Explorer", share: 20, color: "#1BA1E2" }, // IE blue
-        { name: "Other", share: 8, color: "#808080" }
+        { name: "Other", share: 8, color: "#FF69B4" }
     ],
     1999: [
         { name: "Internet Explorer", share: 53, color: "#1BA1E2" }, // IE blue
         { name: "Netscape Navigator", share: 40, color: "#00CED1" }, // Netscape teal
-        { name: "Other", share: 7, color: "#808080" }
+        { name: "Other", share: 7, color: "#FF69B4" }
     ],
     2001: [
         { name: "Internet Explorer", share: 86, color: "#1BA1E2" }, // IE blue
         { name: "Netscape", share: 10, color: "#00CED1" }, // Netscape teal
-        { name: "Other", share: 4, color: "#808080" }
+        { name: "Other", share: 4, color: "#FF69B4" }
     ],
     2003: [
         { name: "Internet Explorer", share: 92, color: "#1BA1E2" }, // IE blue
         { name: "Netscape", share: 4, color: "#00CED1" }, // Netscape teal
-        { name: "Other", share: 4, color: "#808080" }
+        { name: "Other", share: 4, color: "#FF69B4" }
     ],
     2005: [
         { name: "Internet Explorer", share: 85, color: "#1BA1E2" }, // IE blue
         { name: "Firefox", share: 9, color: "#FF7139" }, // Firefox orange
         { name: "Safari", share: 2, color: "#007AFF" }, // Safari blue
-        { name: "Other", share: 4, color: "#808080" }
+        { name: "Other", share: 4, color: "#FF69B4" }
     ],
     2007: [
         { name: "Internet Explorer", share: 77, color: "#1BA1E2" }, // IE blue
         { name: "Firefox", share: 16, color: "#FF7139" }, // Firefox orange
         { name: "Safari", share: 4, color: "#007AFF" }, // Safari blue
-        { name: "Other", share: 3, color: "#808080" }
+        { name: "Other", share: 3, color: "#FF69B4" }
     ],
     2009: [
         { name: "Internet Explorer", share: 65, color: "#1BA1E2" }, // IE blue
         { name: "Firefox", share: 23, color: "#FF7139" }, // Firefox orange
         { name: "Chrome", share: 4, color: "#34A853" }, // Chrome green
         { name: "Safari", share: 4, color: "#007AFF" }, // Safari blue
-        { name: "Other", share: 4, color: "#808080" }
+        { name: "Other", share: 4, color: "#FF69B4" }
     ],
     2011: [
         { name: "Internet Explorer", share: 44, color: "#1BA1E2" }, // IE blue
         { name: "Firefox", share: 30, color: "#FF7139" }, // Firefox orange
         { name: "Chrome", share: 20, color: "#34A853" }, // Chrome green
         { name: "Safari", share: 4, color: "#007AFF" }, // Safari blue
-        { name: "Other", share: 2, color: "#808080" }
+        { name: "Other", share: 2, color: "#FF69B4" }
     ],
     2013: [
         { name: "Chrome", share: 43, color: "#34A853" }, // Chrome green
         { name: "Internet Explorer", share: 30, color: "#1BA1E2" }, // IE blue
         { name: "Firefox", share: 20, color: "#FF7139" }, // Firefox orange
         { name: "Safari", share: 5, color: "#007AFF" }, // Safari blue
-        { name: "Other", share: 2, color: "#808080" }
+        { name: "Other", share: 2, color: "#FF69B4" }
     ],
     2015: [
         { name: "Chrome", share: 53, color: "#34A853" }, // Chrome green
         { name: "Internet Explorer", share: 19, color: "#1BA1E2" }, // IE blue
         { name: "Firefox", share: 16, color: "#FF7139" }, // Firefox orange
         { name: "Safari", share: 10, color: "#007AFF" }, // Safari blue
-        { name: "Other", share: 2, color: "#808080" }
+        { name: "Other", share: 2, color: "#FF69B4" }
     ],
     2017: [
         { name: "Chrome", share: 58, color: "#34A853" }, // Chrome green
@@ -79,7 +79,7 @@ const browserData = {
         { name: "Firefox", share: 13, color: "#FF7139" }, // Firefox orange
         { name: "Internet Explorer", share: 9, color: "#1BA1E2" }, // IE blue
         { name: "Edge", share: 4, color: "#0078D4" }, // Edge blue
-        { name: "Other", share: 2, color: "#808080" }
+        { name: "Other", share: 2, color: "#FF69B4" }
     ],
     2019: [
         { name: "Chrome", share: 64, color: "#34A853" }, // Chrome green
@@ -87,28 +87,28 @@ const browserData = {
         { name: "Firefox", share: 10, color: "#FF7139" }, // Firefox orange
         { name: "Edge", share: 5, color: "#0078D4" }, // Edge blue
         { name: "Internet Explorer", share: 3, color: "#1BA1E2" }, // IE blue
-        { name: "Other", share: 2, color: "#808080" }
+        { name: "Other", share: 2, color: "#FF69B4" }
     ],
     2021: [
         { name: "Chrome", share: 65, color: "#34A853" }, // Chrome green
         { name: "Safari", share: 19, color: "#007AFF" }, // Safari blue
         { name: "Edge", share: 8, color: "#0078D4" }, // Edge blue
         { name: "Firefox", share: 6, color: "#FF7139" }, // Firefox orange
-        { name: "Other", share: 2, color: "#808080" }
+        { name: "Other", share: 2, color: "#FF69B4" }
     ],
     2023: [
         { name: "Chrome", share: 63, color: "#34A853" }, // Chrome green
         { name: "Safari", share: 20, color: "#007AFF" }, // Safari blue
         { name: "Edge", share: 11, color: "#0078D4" }, // Edge blue
         { name: "Firefox", share: 4, color: "#FF7139" }, // Firefox orange
-        { name: "Other", share: 2, color: "#808080" }
+        { name: "Other", share: 2, color: "#FF69B4" }
     ],
     2025: [
         { name: "Chrome", share: 61, color: "#34A853" }, // Chrome green
         { name: "Safari", share: 22, color: "#007AFF" }, // Safari blue
         { name: "Edge", share: 13, color: "#0078D4" }, // Edge blue
         { name: "Firefox", share: 3, color: "#FF7139" }, // Firefox orange
-        { name: "Other", share: 1, color: "#808080" }
+        { name: "Other", share: 1, color: "#FF69B4" }
     ]
 };
 
