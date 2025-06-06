@@ -2,12 +2,13 @@ class BrowserWarsApp {
     constructor() {
         this.currentYear = 1992;
         this.currentMonth = 0; // 0-11 for Jan-Dec
+        this.currentDay = 1; // 1-31 for day of month
         this.isPlaying = false;
         this.totalYears = 2025 - 1992; // 33 years
-        this.totalMonths = this.totalYears * 12; // 396 months total
-        this.monthDuration = 400; // ~400ms per month for smooth animation
-        this.animationSpeed = this.totalMonths * this.monthDuration; // Total duration: ~2.6 minutes
-        this.stepInterval = this.monthDuration; // Monthly steps
+        this.totalDays = this.totalYears * 365.25; // ~12,045 days total (accounting for leap years)
+        this.dayDuration = 15; // ~15ms per day for smooth animation
+        this.animationSpeed = this.totalDays * this.dayDuration; // Total duration: ~3 minutes
+        this.stepInterval = this.dayDuration; // Daily steps
         
         this.monthNames = [
             'January', 'February', 'March', 'April', 'May', 'June',
@@ -57,7 +58,10 @@ class BrowserWarsApp {
         timelineScubber.addEventListener('input', (e) => {
             const yearFloat = parseFloat(e.target.value);
             this.currentYear = Math.floor(yearFloat);
-            this.currentMonth = Math.floor((yearFloat - this.currentYear) * 12);
+            const yearFraction = yearFloat - this.currentYear;
+            this.currentMonth = Math.floor(yearFraction * 12);
+            const monthFraction = (yearFraction * 12) - this.currentMonth;
+            this.currentDay = Math.floor(monthFraction * 30) + 1; // Approximate 30 days per month
             this.updateVisualization();
             if (this.isPlaying) {
                 this.pause();
@@ -85,7 +89,13 @@ class BrowserWarsApp {
         document.getElementById('play-pause-btn').innerHTML = '⏸';
         
         this.animationInterval = setInterval(() => {
-            this.currentMonth++;
+            this.currentDay++;
+            
+            // Advance month when day exceeds approximate month length
+            if (this.currentDay > 30) {
+                this.currentDay = 1;
+                this.currentMonth++;
+            }
             
             if (this.currentMonth >= 12) {
                 this.currentMonth = 0;
@@ -95,10 +105,13 @@ class BrowserWarsApp {
             if (this.currentYear > 2025) {
                 this.currentYear = 1992;
                 this.currentMonth = 0;
+                this.currentDay = 1;
             }
             
-            // Update scrubber value (year + month fraction)
-            const scrubberValue = this.currentYear + (this.currentMonth / 12);
+            // Update scrubber value (year + month + day fractions)
+            const dayFraction = (this.currentDay - 1) / 30;
+            const monthFraction = (this.currentMonth + dayFraction) / 12;
+            const scrubberValue = this.currentYear + monthFraction;
             document.getElementById('timeline-scrubber').value = scrubberValue;
             this.updateVisualization();
         }, this.stepInterval);
@@ -114,7 +127,9 @@ class BrowserWarsApp {
     }
     
     updateVisualization() {
-        const yearFloat = this.currentYear + (this.currentMonth / 12);
+        const dayFraction = (this.currentDay - 1) / 30;
+        const monthFraction = (this.currentMonth + dayFraction) / 12;
+        const yearFloat = this.currentYear + monthFraction;
         const data = interpolateData(yearFloat);
         
         // Update year and month display
