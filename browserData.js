@@ -8,29 +8,29 @@ const browserData = {
         { name: "Other", share: 15, color: "#FF69B4" }
     ],
     1995: [
-        { name: "Netscape Navigator", share: 80, color: "#00CED1" }, // Netscape teal
+        { name: "Netscape Navigator", share: 80, color: "#008B8B" }, // Netscape dark teal
         { name: "Internet Explorer", share: 3, color: "#1BA1E2" }, // IE blue
         { name: "Mosaic", share: 10, color: "#8A2BE2" },
         { name: "Other", share: 7, color: "#FF69B4" }
     ],
     1997: [
-        { name: "Netscape Navigator", share: 72, color: "#00CED1" }, // Netscape teal
+        { name: "Netscape Navigator", share: 72, color: "#008B8B" }, // Netscape dark teal
         { name: "Internet Explorer", share: 20, color: "#1BA1E2" }, // IE blue
         { name: "Other", share: 8, color: "#FF69B4" }
     ],
     1999: [
         { name: "Internet Explorer", share: 53, color: "#1BA1E2" }, // IE blue
-        { name: "Netscape Navigator", share: 40, color: "#00CED1" }, // Netscape teal
+        { name: "Netscape Navigator", share: 40, color: "#008B8B" }, // Netscape dark teal
         { name: "Other", share: 7, color: "#FF69B4" }
     ],
     2001: [
         { name: "Internet Explorer", share: 86, color: "#1BA1E2" }, // IE blue
-        { name: "Netscape", share: 10, color: "#00CED1" }, // Netscape teal
+        { name: "Netscape", share: 10, color: "#008B8B" }, // Netscape dark teal
         { name: "Other", share: 4, color: "#FF69B4" }
     ],
     2003: [
         { name: "Internet Explorer", share: 92, color: "#1BA1E2" }, // IE blue
-        { name: "Netscape", share: 4, color: "#00CED1" }, // Netscape teal
+        { name: "Netscape", share: 4, color: "#008B8B" }, // Netscape dark teal
         { name: "Other", share: 4, color: "#FF69B4" }
     ],
     2005: [
