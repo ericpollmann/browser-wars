@@ -14,8 +14,6 @@ class BrowserWarsApp {
             'July', 'August', 'September', 'October', 'November', 'December'
         ];
         
-        this.isDragging = false;
-        
         this.svg = d3.select('#pie-chart');
         this.width = 600;
         this.height = 600;
@@ -68,18 +66,9 @@ class BrowserWarsApp {
         
         // Handle mouse events for scrubber
         timelineScubber.addEventListener('mousedown', () => {
-            this.isDragging = true;
             if (this.isPlaying) {
                 this.pause();
             }
-        });
-        
-        timelineScubber.addEventListener('mouseup', () => {
-            this.isDragging = false;
-        });
-        
-        timelineScubber.addEventListener('mouseleave', () => {
-            this.isDragging = false;
         });
     }
     
@@ -143,13 +132,8 @@ class BrowserWarsApp {
     }
     
     updatePieChart(data) {
-        if (this.isDragging) {
-            // When dragging, completely rebuild the chart for instant updates
-            this.rebuildPieChart(data);
-        } else {
-            // When not dragging, use smooth transitions
-            this.animatedPieChart(data);
-        }
+        // Always use instant updates for consistent behavior
+        this.rebuildPieChart(data);
     }
     
     rebuildPieChart(data) {
@@ -190,63 +174,6 @@ class BrowserWarsApp {
             .style('opacity', d => d.data.share > 5 ? 1 : 0);
     }
     
-    animatedPieChart(data) {
-        const pieData = this.pie(data);
-        
-        // Bind data to path elements
-        const arcs = this.chartGroup.selectAll('.arc')
-            .data(pieData, d => d.data.name);
-        
-        // Enter new arcs
-        const enterArcs = arcs.enter()
-            .append('g')
-            .attr('class', 'arc');
-        
-        // Add paths to new arcs
-        enterArcs.append('path')
-            .attr('fill', d => d.data.color)
-            .attr('stroke', '#fff')
-            .attr('stroke-width', 2);
-        
-        // Add labels to new arcs
-        enterArcs.append('text')
-            .attr('class', 'arc-label')
-            .attr('text-anchor', 'middle')
-            .attr('font-family', 'Arial, sans-serif')
-            .attr('font-size', '12px')
-            .attr('font-weight', 'bold')
-            .attr('fill', '#333');
-        
-        // Update all arcs (enter + existing)
-        const allArcs = arcs.merge(enterArcs);
-        
-        // Animate path transitions
-        allArcs.select('path')
-            .transition()
-            .duration(200)
-            .attr('d', this.arc)
-            .attr('fill', d => d.data.color);
-        
-        // Update labels with transitions
-        allArcs.select('text')
-            .transition()
-            .duration(200)
-            .attr('transform', d => {
-                const centroid = this.labelArc.centroid(d);
-                return `translate(${centroid})`;
-            })
-            .text(d => {
-                return d.data.share > 5 ? `${d.data.name}\n${d.data.share.toFixed(1)}%` : '';
-            })
-            .style('opacity', d => d.data.share > 5 ? 1 : 0);
-        
-        // Remove old arcs with transition
-        arcs.exit()
-            .transition()
-            .duration(200)
-            .style('opacity', 0)
-            .remove();
-    }
     
     updateLegend(data) {
         const legend = d3.select('#legend');
