@@ -2,9 +2,10 @@ class BrowserWarsApp {
     constructor() {
         this.currentYear = 1992;
         this.isPlaying = false;
-        this.animationSpeed = 120000; // 2 minutes total (120 seconds)
-        this.totalYears = 2025 - 1992;
-        this.stepInterval = this.animationSpeed / (this.totalYears * 4); // Quarter-year steps
+        this.totalYears = 2025 - 1992; // 33 years
+        this.yearDuration = 5000; // 5 seconds per year
+        this.animationSpeed = this.totalYears * this.yearDuration; // Total duration: 165 seconds
+        this.stepInterval = this.yearDuration / 4; // Quarter-year steps (1.25 seconds per step)
         
         this.svg = d3.select('#pie-chart');
         this.width = 600;
