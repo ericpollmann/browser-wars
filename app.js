@@ -14,6 +14,8 @@ class BrowserWarsApp {
             'July', 'August', 'September', 'October', 'November', 'December'
         ];
         
+        this.isDragging = false;
+        
         this.svg = d3.select('#pie-chart');
         this.width = 600;
         this.height = 600;
@@ -66,9 +68,18 @@ class BrowserWarsApp {
         
         // Handle mouse events for scrubber
         timelineScubber.addEventListener('mousedown', () => {
+            this.isDragging = true;
             if (this.isPlaying) {
                 this.pause();
             }
+        });
+        
+        timelineScubber.addEventListener('mouseup', () => {
+            this.isDragging = false;
+        });
+        
+        timelineScubber.addEventListener('mouseleave', () => {
+            this.isDragging = false;
         });
     }
     
@@ -161,32 +172,57 @@ class BrowserWarsApp {
         // Update all arcs (enter + existing)
         const allArcs = arcs.merge(enterArcs);
         
-        // Animate path transitions
-        allArcs.select('path')
-            .transition()
-            .duration(200)
-            .attr('d', this.arc)
-            .attr('fill', d => d.data.color);
+        // Animate path transitions (skip if dragging)
+        const pathSelection = allArcs.select('path');
+        const textSelection = allArcs.select('text');
         
-        // Update labels
-        allArcs.select('text')
-            .transition()
-            .duration(200)
-            .attr('transform', d => {
-                const centroid = this.labelArc.centroid(d);
-                return `translate(${centroid})`;
-            })
-            .text(d => {
-                return d.data.share > 5 ? `${d.data.name}\n${d.data.share.toFixed(1)}%` : '';
-            })
-            .style('opacity', d => d.data.share > 5 ? 1 : 0);
+        if (this.isDragging) {
+            // No transitions when dragging
+            pathSelection
+                .attr('d', this.arc)
+                .attr('fill', d => d.data.color);
+            
+            textSelection
+                .attr('transform', d => {
+                    const centroid = this.labelArc.centroid(d);
+                    return `translate(${centroid})`;
+                })
+                .text(d => {
+                    return d.data.share > 5 ? `${d.data.name}\n${d.data.share.toFixed(1)}%` : '';
+                })
+                .style('opacity', d => d.data.share > 5 ? 1 : 0);
+        } else {
+            // Use transitions when not dragging
+            pathSelection
+                .transition()
+                .duration(200)
+                .attr('d', this.arc)
+                .attr('fill', d => d.data.color);
+            
+            textSelection
+                .transition()
+                .duration(200)
+                .attr('transform', d => {
+                    const centroid = this.labelArc.centroid(d);
+                    return `translate(${centroid})`;
+                })
+                .text(d => {
+                    return d.data.share > 5 ? `${d.data.name}\n${d.data.share.toFixed(1)}%` : '';
+                })
+                .style('opacity', d => d.data.share > 5 ? 1 : 0);
+        }
         
-        // Remove old arcs
-        arcs.exit()
-            .transition()
-            .duration(200)
-            .style('opacity', 0)
-            .remove();
+        // Remove old arcs (use transitions only when not dragging)
+        const exitSelection = arcs.exit();
+        if (this.isDragging) {
+            exitSelection.remove();
+        } else {
+            exitSelection
+                .transition()
+                .duration(200)
+                .style('opacity', 0)
+                .remove();
+        }
     }
     
     updateLegend(data) {
