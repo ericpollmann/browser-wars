@@ -64,14 +64,6 @@ git push -u origin main
 # 3. Enable Pages in repository Settings → Pages → Deploy from branch → main
 ```
 
-### Alternative Hosting Options
-- **Netlify**: Drag and drop the project folder to netlify.com
-- **Vercel**: Run `vercel` in the project directory
-- **Surge**: Run `surge` in the project directory
-- **Firebase**: Use `firebase init hosting` and `firebase deploy`
-
-See `deploy.md` for detailed deployment instructions.
-
 ## Development
 
 The project uses a clean, modular structure:

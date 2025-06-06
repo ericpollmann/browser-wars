@@ -1,0 +1,54 @@
+2025-06-06T07:14:54.451Z: make an app that shows the evolution of browser market share from 1992 through 2025 based on percentage of market share.  Illustrate it as a pie chart.  Make a timeline scrubber on the bottom that plays through the entire history in 2 minutes, but a person can click on the slider and drag to any point in time, where it will remain paused.  Highlight interesting historical developments of web browsers on the display as time goes forward.
+2025-06-06T07:15:46.877Z: continue but init a git repo and commit each change as you go
+2025-06-06T07:23:31.481Z: Update the app to stream through time at a consistent pace so that each year from 1992 to 2025 is about 5 seconds long.
+2025-06-06T07:24:25.102Z: Make the amount of time spent on each month be constant and show the month in the UI near the year
+2025-06-06T07:30:15.209Z: when I drag with the slider the animation makes the pie look warped and useless, remove any transition times / transitions when dragging the slider
+2025-06-06T07:33:07.068Z: The shapes are still oddly movnig around the screen during scrubbing the slider, make them instantly transiont to right position, shape, color, size, etc.
+2025-06-06T07:35:39.016Z: Make the relative position of the browser always be the same -- jumping around (reordering) makes it confusing and hard to follow.  Maybe sort by alphabetical order?
+2025-06-06T07:38:15.820Z: Do instant transitions all the time, not just when dragging the scrubber, basically make the behavior the same when scrubbing as when playing
+2025-06-06T07:40:02.039Z: Interpolate the data on a daily basis to make the transitions render more smoothly
+2025-06-06T07:42:41.721Z: The popup showing year / month notes is obstructing the pie chart in normal / wide mode, can you put it to the right of the browser breakdown beneath the pie chart for all responsive layouts?
+2025-06-06T07:44:37.197Z: Make the timeline scrubber be above the pie chart
+2025-06-06T07:46:56.200Z:     Make all netscape navigator a teal color similar to logo color, all ie be ie logo color, firefox be orange color from logo, safari be blue color from logo, etc.
+2025-06-06T07:49:30.494Z: Chrome, safari, and ie are all blue, can we use green for chrome?
+2025-06-06T07:51:28.384Z: add a horizontal timeline with hash marks for each year that the scrubber renders on top of
+2025-06-06T07:53:42.630Z: that didn't work there's neither a horizontal line nor year hash marks visible
+2025-06-06T07:55:15.152Z: not visible still, not sure if color issue or other  I see the 1992 and 2025 text and the dot to grab for scrubber and play button
+2025-06-06T07:56:27.537Z: it's great but remove the minor year hashbarks, and make the major ones be grey
+2025-06-06T07:58:09.957Z: the background color is white so white labels and white horizontal line are not visible.  also endpoints 1992 and 2025 are rendered twice now, redundantly.  consider all colors and make things visible 
+2025-06-06T07:59:54.353Z: add logos small, same size in pie slices
+2025-06-06T08:03:13.095Z: logos are awful, remove and replace with 100x100 icons found by searching online
+2025-06-06T08:09:22.085Z: icons still no good why use rando svg when you searched official icons -- also move timeline year labels down 5 px
+2025-06-06T08:13:45.181Z: ie using chrome logo netscape using firefox etc -- look and use if a good match
+2025-06-06T08:18:54.300Z: linx: broken, mosaic: broken, other: showing chrome logo, netscape: broken, ie: showing chrome logo, otheres look great
+2025-06-06T08:23:20.721Z: safari: shows chrome logo, netscape and ie: show chrome, look at mapping and fallback/.  Mosaic icon tiny and less verified'
+2025-06-06T08:25:02.986Z: Stop all this and use something like this: https://iconduck.com/sets/browser-logos
+2025-06-06T08:33:53.392Z: There's a better mosaid icon here https://logos.fandom.com/wiki/Mosaic_(web_browser) and for linx can use something like a terminal full of text like https://en.wikipedia.org/wiki/Lynx_(web_browser)#/media/File:Lynx-wikipedia.png
+2025-06-06T08:35:41.296Z: make mozilla color be purple, linx be grey, linx icon https://upload.wikimedia.org/wikipedia/commons/d/d5/Lynx-wikipedia.png
+2025-06-06T08:37:49.929Z: ugh undo the netscape color change, I said mozilla but I meant mosaid should be purple instead of brown.  And other make it pink
+2025-06-06T08:39:09.221Z: This session is being continued from a previous conversation that ran out of context. The conversation is summarized below:
+2025-06-06T08:43:01.096Z: order by chronology of dominance / appearance  instead of alphabetical
+2025-06-06T08:44:32.720Z: can you make pie chart sort that way?
+2025-06-06T08:48:09.774Z: <command-name>cost</command-name>
+2025-06-06T08:48:09.775Z: <local-command-stdout>[38;5;246mTotal cost:            $12.23[39m
+2025-06-06T08:49:01.879Z: add more commentary about what happened -- more and slightly longer messages
+2025-06-06T08:49:29.235Z: talk about each appearing new browser for example
+2025-06-06T08:54:06.418Z: Make text labels larger and easier to read especially percentage market share
+2025-06-06T08:55:35.969Z: Use dark teal for netscape color so text will stand out better
+2025-06-06T08:57:09.418Z: dry up the colors and browser names throughout. in data where netscape appears twice add the values to merge them into one
+2025-06-06T08:59:47.752Z: <command-name>cost</command-name>
+2025-06-06T08:59:47.752Z: <local-command-stdout>[38;5;246mTotal cost:            $13.09[39m
+2025-06-06T09:00:02.409Z: publish somewhere as a static page
+2025-06-06T09:02:15.737Z: pick a hosting option thats easiest -- if you do github pages use my account but don't put it in the gamma org
+2025-06-06T09:03:02.968Z: how is that easier than github pages?  just use github pages unless there's a good reason to use netlify
+2025-06-06T09:03:45.282Z: my id is ericpollmann
+2025-06-06T09:05:17.411Z: created - you push the code
+2025-06-06T09:06:26.001Z: can you do that via api
+2025-06-06T09:07:25.240Z: install gh and do it, get rid of gh alias if needed
+2025-06-06T09:19:18.721Z: Done manually.  Fix icon paths they are at logos not icons I believe?
+2025-06-06T09:19:57.324Z: The one deployed in github has them at logos, do we need to git push?
+2025-06-06T09:34:44.569Z: one last thing make a link in november 1997 note to this url to open in a new tab https://gamma.app/docs/The-Pioneers-Behind-Netscape-Navigator-z9zcrgdx7l8n10g?mode=present#card-akb3uu6nyqgk2w0
+2025-06-06T15:07:08.846Z: extract the claude history (all the commands I typed in this session) into a simple text file with one prompt per line called 'how_this_was_built.txt'
+2025-06-18T00:51:24.011Z: There are some json files in ~/.claude/projects/-Users-eric-src-browser-wars/ with the commands, please look in those and based on the timestamps of tile files and/or messages inside, extract the user typed messages nito a text file with one prompt per line called how_this_was_built.txt
+2025-06-18T00:52:51.100Z: try using jq
+2025-06-18T00:55:19.468Z: It looks like you're getting it already, but would be great to include a date/time (iso format) timestamp as the prefix of each user message
