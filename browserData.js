@@ -146,9 +146,9 @@ function interpolateData(year) {
         }
     }
     
-    // If exact match, return that data
+    // If exact match, return that data (sorted alphabetically)
     if (browserData[year]) {
-        return browserData[year];
+        return browserData[year].slice().sort((a, b) => a.name.localeCompare(b.name));
     }
     
     // Interpolate between two years
@@ -178,5 +178,5 @@ function interpolateData(year) {
         }
     });
     
-    return interpolated.sort((a, b) => b.share - a.share);
+    return interpolated.sort((a, b) => a.name.localeCompare(b.name));
 }

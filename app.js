@@ -32,10 +32,10 @@ class BrowserWarsApp {
             .append('g')
             .attr('transform', `translate(${this.width / 2}, ${this.height / 2})`);
         
-        // Create pie generator
+        // Create pie generator with alphabetical sorting
         this.pie = d3.pie()
             .value(d => d.share)
-            .sort(null);
+            .sort((a, b) => a.name.localeCompare(b.name));
         
         // Create arc generator
         this.arc = d3.arc()
