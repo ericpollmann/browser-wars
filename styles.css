@@ -62,15 +62,19 @@ main {
     filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
 }
 
+.sidebar {
+    flex: 0 0 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .chart-info {
-    position: absolute;
-    top: 20px;
-    left: 20px;
     background: rgba(255, 255, 255, 0.9);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    min-width: 250px;
+    border-left: 4px solid #764ba2;
 }
 
 .date-display {
@@ -100,7 +104,6 @@ main {
 }
 
 .legend {
-    flex: 0 0 300px;
     background: rgba(255, 255, 255, 0.5);
     padding: 20px;
     border-radius: 10px;
@@ -238,10 +241,17 @@ main {
         align-items: center;
     }
     
-    .legend {
+    .sidebar {
         flex: none;
         width: 100%;
         max-width: 600px;
+        flex-direction: row;
+        gap: 20px;
+    }
+    
+    .legend,
+    .chart-info {
+        flex: 1;
     }
 }
 
@@ -263,10 +273,9 @@ main {
         height: auto;
     }
     
-    .chart-info {
-        position: static;
-        margin-bottom: 20px;
-        width: 100%;
+    .sidebar {
+        flex-direction: column;
+        gap: 15px;
     }
     
     .timeline-controls {
